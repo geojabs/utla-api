@@ -14,7 +14,7 @@ var usuarios = require('./routes/usuarios');
 var postagens = require('./routes/postagens');
 var comentarios = require('./routes/comentarios');
 
-var app = express();
+var app = express();          
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
