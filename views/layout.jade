@@ -1,7 +1,9 @@
 doctype html
-html
+html(ng-app='utlaweb')
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='/materialize-css/materialize.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    script(src='/materialize-js/materialize.min.js')
   body
     block content

@@ -1,8 +1,24 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@font-face{
+    font-family: "Roboto-Thin";
+    src: url("/materialize-font/Roboto-Thin.ttf");
 }
 
-a {
-  color: #00B7FF;
+.banner{
+    background: url('http://www.hdwallpapersact.com/wp-content/uploads/2013/12/hd-view-of-ny-city-night.jpg') center center;
+    background-size: cover;
+}
+
+.background-black-opacity{
+    color:white;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 35%;
+    padding: 0.5%;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.roboto-thin{
+    font-family: "Roboto-Thin";
 }

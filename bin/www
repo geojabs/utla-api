@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('utla:server');
+var debug = require('debug')('utlaweb:server');
 var http = require('http');
 
 /**

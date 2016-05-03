@@ -5,16 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/utla');
-
 var routes = require('./routes/index');
-var usuarios = require('./routes/usuarios');
-var postagens = require('./routes/postagens');
-var comentarios = require('./routes/comentarios');
+var users = require('./routes/users');
 
-var app = express();          
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,48 +21,46 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(function(req, res, next){
-    req.db = db;
-    next();
-});
+app.use('/materialize-css', express.static(path.join(__dirname, 'node_modules/materialize-css/dist/css')));
+app.use('/materialize-js', express.static(path.join(__dirname, 'node_modules/materialize-css/dist/js')));
+app.use('/materialize-font', express.static(path.join(__dirname, 'node_modules/materialize-css/dist/font/roboto')));
+/* 
+    Replace this: ../fonts/roboto/    
+    To this: /materialize-font/     
+*/
 
 app.use('/', routes);
-app.use('/utla-api-v1/usuarios', usuarios);
-app.use('/utla-api-v1/postagens', postagens);
-app.use('/utla-api-v1/comentarios', comentarios);
+app.use('/api/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
-
-// Colocando um comentário extra
 
 // error handlers
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 
